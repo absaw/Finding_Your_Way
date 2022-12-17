@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def generate_maze():
+def generate_maze(file_path):
     
-    schematic_file=open('Schematics/Schema_1.txt', 'r')
+    schematic_file=open(file_path, 'r')
     schema_data=schematic_file.readlines()
     n_row=len(schema_data)
     n_col=len(schema_data[0].strip())
