@@ -15,7 +15,6 @@ def generate_maze(file_path):
         for col in range(len(line)):
             if line[col]=='X':
                 maze[row][col]=5
-    
     # print(maze)
     # plot_maze(maze)
     return maze

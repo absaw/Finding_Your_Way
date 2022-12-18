@@ -36,17 +36,21 @@ class way:
         self.drone_maze[self.drone[0],self.drone[1]]=0
         next_r=self.drone[0]+dir[0]
         next_c=self.drone[1]+dir[1]
-        if next_r>=0 and next_r<self.n_row:
+        if next_r>=0 and next_r<self.n_row and next_c>=0 and next_c<self.n_col:
             if self.maze[next_r][next_c]==5:
                 next_r=self.drone[0]
-        else:
-            next_r=self.drone[0]
-
-        if next_c>=0 and next_c<self.n_col:
-            if self.maze[next_r][next_c]==5:
                 next_c=self.drone[1]
         else:
+            next_r=self.drone[0]
             next_c=self.drone[1]
+
+        # if next_c>=0 and next_c<self.n_col:
+        #     if self.maze[next_r][next_c]==5:
+        #         next_c=self.drone[1]
+        # else:
+        #     next_c=self.drone[1]
+        self.drone[0]=next_r
+        self.drone[1]=next_c
         self.drone_maze[next_r][next_c]=10
             
 
@@ -304,10 +308,10 @@ class way:
 
 if __name__=="__main__":
 
-    file_path='Schematics/Schema_2.txt'
+    file_path='Schematics/Schema_1.txt'
     # file_path='/Users/abhishek.sawalkar/Library/Mobile Documents/com~apple~CloudDocs/AI Project/Finding_Your_Way/Schematics/Schema_2.txt'
     way=way(file_path)
-    n_iterations=15
+    n_iterations=54
     #First taking random step
     # way.random_step()
     # way.print_state()
