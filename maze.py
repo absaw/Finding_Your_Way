@@ -20,7 +20,7 @@ def generate_maze(file_path):
     # plot_maze(maze)
     return maze
 def plot_maze(maze):
-    # print(maze)
+    print(maze)
     plt.imshow(maze, "Dark2")
     plt.show()
 # generate_maze()

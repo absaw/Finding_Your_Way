@@ -1,0 +1,22 @@
+how long? = short sequences. Verify this yourselves
+
+For e.g. 
+
+Down Operation:
+
+Above Cell --  | A |
+Current Cell-- | C |
+Below Cell--   | B |
+                
+#Prob is like flow=>P(inside) - P(outside)
+P(Cnext)=P(Cnow)+P_in - P_out 
+
+If A is wall
+    P_in = 0
+else
+    P_in = P(A)
+
+If B is wall
+    P_out = 0
+else
+    P_out = P(C)
