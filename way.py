@@ -1,4 +1,4 @@
-from maze import *
+from Maze import *
 import random
 # def way():
 class way:
@@ -311,7 +311,7 @@ if __name__=="__main__":
     file_path='Schematics/Schema_1.txt'
     # file_path='/Users/abhishek.sawalkar/Library/Mobile Documents/com~apple~CloudDocs/AI Project/Finding_Your_Way/Schematics/Schema_2.txt'
     way=way(file_path)
-    n_iterations=54
+    # n_iterations=
     #First taking random step
     # way.random_step()
     # way.print_state()
@@ -324,8 +324,11 @@ if __name__=="__main__":
             way.up_step()
         elif k<3*way.n_col-1:
             way.right_step()
-        # elif k<4*way.n_col-1:
-        #     way.down_step()
+        elif k<4*way.n_col-1:
+            way.left_step()
+        # elif k<5*way.n_col-1:
+        #     way.right_step()
+        
         # way.plot_maze(way.maze)
         # way.print_state()
         # way.plot_maze(way.p_now)
@@ -337,6 +340,7 @@ if __name__=="__main__":
     print("Drone at -> ",way.drone)
     if way.drone in non_zero_list:
         print("Yes")
+        print("prob = ",way.p_now[way.drone[0],way.drone[1]])
     else:
         print("No")
 
