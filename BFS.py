@@ -3,6 +3,7 @@ import matplotlib as plt
 import random
 import matplotlib.pyplot as plt
 import collections
+from Maze import *
 # from collections import deque
 
 # 0 = Unblocked
@@ -51,11 +52,11 @@ def get_bfs_path(maze,n_row,n_col,start,end):
     #     # print("Path not found")
     #     return [path_found,None]
 
-a=np.array([ [0,1,1,1,1],
-            [0,0,0,0,1],
-            [0,0,1,0,0],
-            [1,1,1,1,0],
-            [0,0,0,0,0]])
+# a=np.array([ [0,1,1,1,1],
+#             [0,0,0,0,1],
+#             [0,0,1,0,0],
+#             [1,1,1,1,0],
+#             [0,0,0,0,0]])
 
 # # a2=[[0,0,1,0,0],
 # #     [102,0,200,0,0],
@@ -65,8 +66,13 @@ a=np.array([ [0,1,1,1,1],
 
 # result=get_traversal_table(a,5,5,(4,4),True)
 # print(result)
-# print(get_bfs_path(a, 5, 5, (0,0), (4,0)))
-        
+# # print(get_bfs_path(a, 5, 5, (0,0), (4,0)))
+# file_path='Schematics/Schema_1.txt'
+# m=generate_maze(file_path)
+# print(len(get_bfs_path(m, 19, 19, (0,0), (4,0))))
+
+
+
 
 
         
