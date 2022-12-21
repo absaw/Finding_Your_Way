@@ -1,7 +1,8 @@
 from Maze import *
+from collections import defaultdict
 import random
 # def way():
-class way:
+class Way:
     
     def __init__(self,file_path):
         self.maze=generate_maze(file_path)
@@ -108,6 +109,7 @@ class way:
             # self.print_state()
         self.p_now=self.p_next.copy()
         self.drone_move(self.down)
+        self.move_list.append("Down")
     
     def right_step(self):
         for col in range(self.n_col):
@@ -152,6 +154,8 @@ class way:
             # self.print_state()
         self.p_now=self.p_next.copy()
         self.drone_move(self.right)
+        self.move_list.append("Right")
+
     
     def left_step(self):
         for col in range(self.n_col-1,-1,-1):
@@ -196,6 +200,8 @@ class way:
             # self.print_state()
         self.p_now=self.p_next.copy()
         self.drone_move(self.left)
+        self.move_list.append("Left")
+
 
     
     def up_step(self):
@@ -239,7 +245,7 @@ class way:
             # self.print_state()
         self.p_now=self.p_next.copy()
         self.drone_move(self.up)
-    
+        self.move_list.append("Up")
     
     def init_probabilities(self):
         #init_probabilities
@@ -262,6 +268,9 @@ class way:
         print(np.sum(self.p_now))
         print(self.p_now)
         print("Non Zeros->",np.count_nonzero(self.p_now))
+
+        print("Move List ->",*self.move_list)
+        print("No. of Steps ->",len(self.move_list))
         # print("\nP_next->\n")
         # print(np.sum(self.p_next))
         # print(self.p_next)
@@ -270,16 +279,16 @@ class way:
         ch=random.choice([1,2,3,4])
         if ch==1:
             self.down_step()
-            self.move_list.append(1)
+            # self.move_list.append(1)
         elif ch==2:
             self.left_step()
-            self.move_list.append(2)
+            # self.move_list.append(2)
         elif ch==3:
             self.up_step()
-            self.move_list.append(3)
+            # self.move_list.append(3)
         elif ch==4:
             self.right_step()
-            self.move_list.append(4)
+            # self.move_list.append(4)
 
     def get_max_list(self):
         self.max_value=np.max(self.p_now)
@@ -291,22 +300,41 @@ class way:
                     self.max_list.append([r,c])
         return self.max_list
     
-    def get_non_zero_list(self):
+    def get_non_zero_list_prob(self):
         self.non_zero_list=[]
+        self.non_zero_dict=defaultdict()
         for r in range(self.n_row):
             for c in range(self.n_col):
                 if self.p_now[r][c]!=0:
                     self.non_zero_list.append([r,c])
-        return self.non_zero_list
+                    self.non_zero_dict[(r,c)]=self.p_now[r][c]
+        self.non_zero_dict=dict(sorted(self.non_zero_dict.items(), key=lambda item: item[1]))
+        #List sorted in non-decreasing order of probabilities
+        return list(self.non_zero_dict.keys())
+        # return self.non_zero_list
+    
+    def get_non_zero_list(self):
+        self.non_zero_list=[]
+        self.non_zero_dict=defaultdict()
+        for r in range(self.n_row):
+            for c in range(self.n_col):
+                if self.p_now[r][c]!=0:
+                    self.non_zero_list.append([r,c])
+                    self.non_zero_dict[(r,c)]=self.p_now[r][c]
+        self.non_zero_dict=dict(sorted(self.non_zero_dict.items(), key=lambda item: item[1]))
+        #List sorted in non-decreasing order of probabilities
+        return list(self.non_zero_dict.keys())
+        # return self.non_zero_list
     def plot_maze(self,arr):
         # print(maze)
-        plt.imshow(arr, "Dark2")
+        # plt.imshow(arr, "Dark2")
+        plt.imshow(arr, "ocean")
         plt.show()
 
 # way()
 
 
-if __name__=="__main__":
+def main2():
 
     file_path='Schematics/Schema_1.txt'
     # file_path='/Users/abhishek.sawalkar/Library/Mobile Documents/com~apple~CloudDocs/AI Project/Finding_Your_Way/Schematics/Schema_2.txt'
@@ -347,14 +375,15 @@ if __name__=="__main__":
 
 
 
-# if __name__=="__main__":
-    # file_path='/Users/abhishek.sawalkar/Library/Mobile Documents/com~apple~CloudDocs/AI Project/Finding_Your_Way/Schematics/Schema_2.txt'
-    # file_path='Schematics/Schema_2.txt'
-    # way=way(file_path)
+if __name__=="__main__":
+    file_path='/Users/abhishek.sawalkar/Library/Mobile Documents/com~apple~CloudDocs/AI Project/Finding_Your_Way/Schematics/Schema_2.txt'
+    file_path='Schematics/Schema_1.txt'
+    way=Way(file_path)
     # way.print_state()
-
+    # way.plot_maze(way.p_now)
     # == Down Testing
-    # way.down_step()
+    way.down_step()
+    way.plot_maze(way.p_now)
     # way.print_state()
     # way.down_step()
     # way.print_state()

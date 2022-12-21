@@ -9,8 +9,8 @@ def print_dict(d):
     for key,value in d.items():
         print(key," : ",value)
 
-# if __name__=="__main__":
-def main():
+if __name__=="__main__":
+# def main():
     start = time()
 
     # #=========== Log file =======================
@@ -78,10 +78,8 @@ def main():
     #                         distance=len(get_bfs_path(maze, n_row, n_col, (pos_1_r,pos_1_c), (pos_2_r,pos_2_c)))-1
     #                         # print(distance)
     #                         dist_dict[key]=distance
-    # print(dist_dict)
-    # dist_file = open("StoredDistances/dist_dict_schema1.pkl", "wb")
+    # dist_file = open("StoredDistances/dist_dict_Schema1.pkl", "wb")
     # pickle.dump(dist_dict, dist_file)
-    # dist_file.write(str(final_utility))
     # dist_file.close()
     #==========================
 
@@ -91,7 +89,6 @@ def main():
         data = handle.read()
     dist_dict = pickle.loads(data)
 
-    # return
     
     #Setting initial rewards and utility
     for state in state_dict:
@@ -221,7 +218,7 @@ def main():
     for state in final_utility:
         final_utility[state]=state_dict[state][-1]
     # #======== Dumping a dictionary as pickle and then reading it again using loads =====
-    final_utility_file = open("StoredUtilities/Schema1.pkl", "wb")
+    final_utility_file = open("StoredUtilities/Schema3.pkl", "wb")
     pickle.dump(final_utility, final_utility_file)
     # final_utility_file.write(str(final_utility))
     final_utility_file.close()
@@ -231,7 +228,7 @@ def main():
    
 
     end=time()
-    file = open("StoredUtilities/Schema1_Result.txt", "w")
+    file = open("StoredUtilities/Schema3_Result.txt", "w")
     print("Max Utility = ",m)
     file.write('\n Max Utility =  %s'%str(m))
     file.write("\n\nExecution Time = "+str(end-start)+" s\n")
@@ -282,7 +279,7 @@ def get_dir_state(n_row,n_col,maze,r1,c1,r2,c2,dir):
     dir_state=[dir_state_1,dir_state_2]
     dir_state=(dir_state[0][0],dir_state[0][1],dir_state[1][0],dir_state[1][1])
     return dir_state
-main()
+# main()
 
 
 
